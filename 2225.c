@@ -5,7 +5,6 @@ int arr[201][201];
 int main() 
 {
 	int N, k;
-	printf("asd");
 	scanf("%d %d", &N, &k);
 
 	for(int j = 0; j <= N; j++) 
