@@ -51,3 +51,8 @@ int compare(const void *a, const void *b)
 
     return strcmp(tmp2, tmp1);
 }
+/*
+어차피 비교는 한 번에 두 개씩만 한다는 걸 기억하자
+너무 한꺼번에 하려고만 하면 막힌다
+compare방식을 못 정해서 어려웠던 문제
+*/
