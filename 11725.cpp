@@ -2,8 +2,8 @@
 
 using namespace std;
 
-vector<int> v[100001];
-int arr[100001];
+vector<int> v[100000];
+int arr[100000] = {1, 1,};
 
 void dfs(int k)
 {
@@ -13,7 +13,7 @@ void dfs(int k)
 	//반복
 	for(int x : v[k])
 	{
-		if(!arr[k])
+		if(x != arr[k])
 		{
 			arr[x] = k;
 			dfs(x);
@@ -35,8 +35,6 @@ int main()
 		v[tmp1].push_back(tmp2);
 		v[tmp2].push_back(tmp1);
 	}
-
-	arr[1] = 1;
 
 	dfs(1);
 
