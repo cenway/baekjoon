@@ -1,3 +1,8 @@
+//바킹독 방식
+//an이라는 변수에 대해 진행된 내 방식에 반해
+//an의 값을 활용해 진행한 방식
+//값의 범위가 an의 수보다 훨씬 커서 메모리는 더 잡아먹음 
+
 #include <bits/stdc++.h>
 using namespace std;
 
