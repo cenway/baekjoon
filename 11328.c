@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int arr1[26];
-int arr2[26];
+
 int main() {
 	
 	int N;
@@ -11,6 +10,8 @@ int main() {
 	for(int i = 0; i < N; i++)
 	{
 		char tmp[1001] = {0, };
+		int arr1[26] = {0,};
+		int arr2[26] = {0,};
 		scanf("%s", tmp);
 		char *ptmp = tmp;
 		while(*ptmp != 0)
@@ -41,8 +42,6 @@ int main() {
 		}
 		char c;
 		scanf("%c", &c);
-		memset(arr1, 0, sizeof(arr1));
-		memset(arr2, 0, sizeof(arr2));
 	}
 	return 0;
 }
