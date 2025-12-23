@@ -28,7 +28,7 @@ int main() {
 
 	int tmp = arr[6] + arr[9];
 	if(max + max < tmp)
-		max = tmp/2 + tmp%2;
+		max = (tmp + 1)/2;
 
 	cout << max;
 
