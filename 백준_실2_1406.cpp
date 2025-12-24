@@ -1,6 +1,7 @@
 /*
 stl list 기본
-초기화 되지 않은 리스트에 .begin() .end() 쓰지 말자
+초기화 되지 않은 리스트에 .begin() .end() 썼으면
+접근하지는 말자
 */
 
 #include <bits/stdc++.h>
