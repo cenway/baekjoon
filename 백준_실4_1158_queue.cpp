@@ -1,6 +1,7 @@
 /*
 출력을 문자열로 할 때는 변환 유념할 것.
 가능하면 그냥 to_string()하든가 아니면 바로 출력하자
+또, stl 문자열은 null말고 내제된 길이 변수로 끝을 확인함
 */
 #include <bits/stdc++.h>
 using namespace std;
