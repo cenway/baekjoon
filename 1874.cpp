@@ -14,7 +14,7 @@ int main() {
 	{
 		if((!stk.empty()) && (stk.top() == k))
 		{
-			while(stk.top() != k)
+			while(stk.top() == k)
 			{
 				stk.pop();
 				cin >> k;
@@ -22,13 +22,14 @@ int main() {
 				if(stk.empty())
 					break;
 			}
-
 		}
-		else if()
+		else
 		{
-
+			stk.push(i);
+			ans += "+\n";
 		}
 	}
+	cout << ans;
 	return 0;
 }
 /*
