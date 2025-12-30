@@ -14,16 +14,12 @@ int main() {
 	{
 		stk.push(i);
 		ans += "+\n";
-		if((!stk.empty()) && (stk.top() == k))
+		
+		while(!stk.empty() && stk.top() == k)
 		{
-			while(stk.top() == k)
-			{
-				stk.pop();
-				cin >> k;
-				ans += "-\n";
-				if(stk.empty())
-					break;
-			}
+			stk.pop();
+			cin >> k;
+			ans += "-\n";
 		}
 		if((!stk.empty()) && (stk.top() != k) && (stk.top() > k))
 		{
