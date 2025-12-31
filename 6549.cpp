@@ -7,8 +7,6 @@ typedef struct
 	int height;
 }p;
 
-stack<p> stk;
-
 int main() {
 	// 코드 작성
 	ios::sync_with_stdio(0);
@@ -19,7 +17,7 @@ int main() {
 	{
 		cin >> n;
 		if(!n)	break;
-
+		stack<p> stk;
 		long long max = 0;
 		while(n--)
 		{
@@ -34,9 +32,13 @@ int main() {
 				long long k = stk.top().height * ncnt;
 				if(max < k) max = k;
 				stk.pop();
-				if(!stk.empty())	stk.top().cnt +=ncnt;
+				if(stk.empty() || stk.top().height < tmp) 
+					ncnt++;
+				else
+					stk.top().cnt += ncnt;
 			}
-			stk.push({ncnt, tmp});
+			if(tmp)
+				stk.push({ncnt, tmp});
 		}
 		while(!stk.empty())
 			{
@@ -65,4 +67,11 @@ int main() {
 위가 끊겼을 때 밑에 뭘 해줘야 할지 == 그 크기를 더해줘야지
 
 최대값은 뺄 때 계산
+큰 값은 그냥 쌓아
+같은 값도 그냥 쌓아 어차피 보다 더 작은 값오면 합쳐짐
+작은 값 오면
+큰 거 cnt를 pop하고 max 비교를 진행하는데 이 때 
+그 다음 값(top 바로 밑에 거)가 tmp보다 작거나 비었으면
+tmp에 cnt를 더해줘
+아니면 밑으로 넘겨
 */
