@@ -6,4 +6,4 @@
 ㄴ반복자 사용 불가함을 유의
 4. c++의 함수들은 새로 배워 쓸 때 마다 기록해두기
 
-find(), fill(), sort(), 
+find(), fill(), sort(), min_element(),
