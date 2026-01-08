@@ -1,3 +1,4 @@
+//기본형 bfs
 #include <iostream>
 #include <queue>
 #include <algorithm>
