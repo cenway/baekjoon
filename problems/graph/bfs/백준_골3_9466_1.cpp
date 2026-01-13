@@ -35,21 +35,17 @@ int main() {
 			
 			while(!visit[arr[stk.top()]]) 
 			{
-				stk.push(arr[stk.top()]);
 				visit[arr[stk.top()]] = i;
-				cout << stk.top() << endl;
+				stk.push(arr[stk.top()]);
 			}
 			if(visit[arr[stk.top()]] == visit[stk.top()])
 			{
 				int tmp = arr[stk.top()];
-				while(tmp != stk.top())	
-				{
-					stk.pop();
-					cout << stk.top() << endl;
-				}
+				while(tmp != stk.top())	stk.pop();
 				stk.pop();
 			}
 			ans+= stk.size();
+			
 			//계속 다음 값을 스택에 채워 넣기
 			//넣다가 visit에 걸리면 
 			//visit값으로 구분해서 다르면 그냥 사이즈를 더하고
