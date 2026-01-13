@@ -20,12 +20,12 @@ int main() {
 
 		cin >> n;
 		
-		for(int i = 0; i < n; i++)
+		for(int i = 1; i <= n; i++)
 		{
 			cin >> arr[i];
 			pointed[arr[i]] = true;
 		}
-		for(int i = 0; i < n; i++)
+		for(int i = 1; i <= n; i++)
 		{
 			if(pointed[i]) continue;
 			stack<int> stk;
@@ -33,18 +33,31 @@ int main() {
 			stk.push(i);
 			visit[i] = i;
 			
+			while(!visit[arr[stk.top()]]) 
+			{
+				stk.push(arr[stk.top()]);
+				visit[arr[stk.top()]] = i;
+				cout << stk.top() << endl;
+			}
+			if(visit[arr[stk.top()]] == visit[stk.top()])
+			{
+				int tmp = arr[stk.top()];
+				while(tmp != stk.top())	
+				{
+					stk.pop();
+					cout << stk.top() << endl;
+				}
+				stk.pop();
+			}
+			ans+= stk.size();
 			//계속 다음 값을 스택에 채워 넣기
 			//넣다가 visit에 걸리면 
 			//visit값으로 구분해서 다르면 그냥 사이즈를 더하고
 			//다음 값(visit인 값)을 저장 후
 			//스택을 빼면서 같아질 때까지
-			//같아지면 스택에 남은 사이즈를 더하고
-
+			//같아지면 스택에 남은 사이즈를 더하기
 		}
-		
-			
-		
-		
+		cout << ans << endl;
 	}
 	return 0;
 }
