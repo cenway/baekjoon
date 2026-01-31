@@ -1,16 +1,17 @@
 //dfs중 visit을 체크하기 어려운 경우는 재귀가 편한듯
 #include <iostream>
+#include <vector>
 using namespace std;
 
-string s;
+vector<int> v;
 int n;
 bool arr[9];
 void func(int m)
 {
 	if(m == 0)
 	{
-		for(auto c: s)
-			cout << c << ' ';
+		for(auto i: v)
+			cout << i << ' ';
 		cout << endl;
 		return;
 	}
@@ -19,10 +20,11 @@ void func(int m)
 	{
 		if(arr[i]) continue;
 		arr[i] = true;
-		
-
+		v.push_back(i); 
+		func(m - 1);
+		v.pop_back();
+		arr[i] = false;
 	}
-
 }
 
 int main() {
