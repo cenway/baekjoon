@@ -9,6 +9,10 @@ using namespace std;
 bool ans[1<<25];
 char map[5][5];
 bool visit[5][5];
+int dx[4] = {1, 0, -1, 0};
+int dy[4] = {0, 1, 0, -1};
+
+queue<pair<int, int>> q;
 
 void func(int x,int y, int select, int s, int ans_bit)
 {
@@ -28,6 +32,7 @@ void func(int x,int y, int select, int s, int ans_bit)
 		return;
 	
 	
+	for()
 	
 }
 
@@ -42,7 +47,14 @@ int main()
 
 	for(int i = 0; i < 5; i++)
 		for(int j = 0; j < 5; j++)
+		{
+			int k = 0;
+			if(map[i][j] == 'S') k = 1;
+			q.push({i, j});
+			visit[i][j]=true;
 
+			func(i, j, 0, k, 0);
+		}
 
 	return 0;
 }
