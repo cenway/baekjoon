@@ -1,6 +1,9 @@
 //조합으로 7칸을 골라내고
 //그 중 조건에 맞는 케이스 만큼 ++ans해서 답 찾기
 //next_permutation을 조합으로 활용함
+
+//그래프에서 꼭 인접을 확인하고 뽑기보단
+//뽑고 인접한지를 확인하는 방법도 생각하자
 #include <iostream>
 #include <algorithm>
 #include <queue>
