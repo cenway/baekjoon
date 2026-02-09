@@ -37,6 +37,11 @@ int main() {
 	{
 		for(auto i = v[k].begin(); i != v[k].end(); i++)
 		{
+			//이것도 냅다 순서대로 하면 반례가 생김
+			//갔다가 돌아와? 이거를?
+			//그냥 씨 첨부터 백트래킹으로 풀었어야 했나
+			//k고->저가 맞는 순서인지도 아직 불분명해.
+			//그렇게 따지면 그냥 다시해야지
 			int x = i->first;
 			int y = i->second;
 			int max_dir = 0;
@@ -51,13 +56,14 @@ int main() {
 				//보는 방향 고정 후 4방향에 대해 체크
 				for(int z = 0; z < 4; z++)
 				{
+					if(!dx[z]&&!dy[z]) continue;
 					int nx = x;
 					int ny = y;
 					while(1)
 					{
 						nx += dx[z];
 						ny += dy[z];
-						if(nx<0||ny<0||nx>=n||ny>=m||map[nx][ny])
+						if(nx<0||ny<0||nx>=n||ny>=m||map[nx][ny] == 6)
 							break;
 						if(visit[nx][ny])
 							continue;
@@ -77,7 +83,36 @@ int main() {
 			//최대 방향에 대해 실제로 진행
 			cnt -= max_cnt;
 			//함수화 하자
-			
+			int *ndir = &(dir[k][max_dir]);
+			int dx[4] = {ndir[0], 0, -ndir[2], 0};
+			int dy[4] = {0, ndir[1], 0, -ndir[3]};
+			int ncnt = 0;
+			//보는 방향 고정 후 4방향에 대해 체크
+			for(int z = 0; z < 4; z++)
+			{
+				if(!dx[z]&&!dy[z]) continue;
+				int nx = x;
+				int ny = y;
+				while(1)
+				{
+					nx += dx[z];
+					ny += dy[z];
+					if(nx<0||ny<0||nx>=n||ny>=m||map[nx][ny]==6)
+						break;
+					if(visit[nx][ny])
+						continue;
+					visit[nx][ny] = true;
+				}
+			}
+			for(int i = 0; i < n; i++)
+			{
+				for(int j = 0; j < m; j++)
+				{
+					cout << visit[i][j] << ' ';
+				}
+				cout << '\n';
+			}
+			cout << '\n';
 		}
 	}
 
