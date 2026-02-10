@@ -1,3 +1,5 @@
+//결국엔 브루트 포스
+//오히려 과정을 단순화해서 훨씬 나은 풀이가 됨
 #include <iostream>
 #include <vector>
 using namespace std;
