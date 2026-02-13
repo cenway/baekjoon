@@ -3,9 +3,9 @@
 #include <queue>
 using namespace std;
 
-//bool map[401][401];
 vector<int> v[401];
 bool visit[401];
+bool arrived_stg[401];
 
 int main() {
 	// 코드 작성
@@ -18,70 +18,139 @@ int main() {
 		v[tmp1].push_back(tmp2);
 		v[tmp2].push_back(tmp1);
 	}
+	
 
-	int min_width = 100000;
-	int width = 0;
 	int arrive = 0;
-	int depth[2] = {0, };
-	bool depth_toggle = false;
-
-	queue<int> q;
+	queue<pair<int, int>> q;
 	visit[1] = true;
-	q.push(1);
-	depth[depth_toggle]++;
+	for(auto y:v[1])
+	{
+		q.push({y, 0});
+		visit[y] = true;
+	}
+	//일단 1에서 뻗어나온 애들 다 연결하고
 
+	//여럿으로 갈라지는 경우엔 전부 낙인 찍기
+	//2에 도착했을 경우, 낙인 여부를 확인하고 arrived++
 	while(!q.empty())
 	{
-		int x = q.front();
+		int cnt = 0;
+		bool arrived_flag = false;
+		int x = q.front().first;
+		int stg = q.front().second;
 		q.pop();
-		depth[depth_toggle]--;
 
 		for(auto y:v[x])
 		{
-			//그냥 2라고 냅다 ++하면 안 됨
-			if(y == 2)
+			if(!visit[y]) cnt++;
+			if(y != 2) continue;
+			if(!stg) arrive++;
+			else if(!arrived_stg[stg])
 			{
+				arrived_stg[stg] = true;
 				arrive++;
-				continue;
 			}
-			if(visit[y]) continue;
-			q.push(y);
-			visit[y] = true;
-			depth[!depth_toggle]++;
-			width++;
+			arrived_flag = true;
+			break;
 		}
+		if(arrived_flag) continue;
 
-		if(!q.empty()&&!depth[depth_toggle])
-		{
-			cout << min_width << '\n';
-			depth_toggle = !depth_toggle;
-			if(min_width > width) min_width = width;
-			width = 0;
+		//다른 낙인 찍힌 놈이 앞 길을 막았을 때
+		//나는 이 길이 유일하면 상관 없지
+		//근데 사실 나도 낙인 찍혔으면.
+		//누구의 낙인을 따라야 하는가.
+		//내 낙인으로 진행하다가 같은 낙인 다른 놈이 도달하면
+		//그러나 다른 낙인은 걔가 유일하게 도달할 수 있는 놈이면
+		//낙인을 새거로 바꾸것도 당연히 문제가 되고
+		//그렇다고 둘 다 데려가면서 낙인을 다 저장하는 거는
+		//사실 상 경로를 다 저장하자는 거고
+
+		//그럼 미리 다음 것도 봐서 막는 건
+		//그럼 그 다음 거는?
+
+		for(auto y:v[x])
+		{		
+			if(visit[y]) continue;
+
+			if(cnt > 1) 
+			{
+				if(!stg)
+					q.push({y, x});
+				else
+				{
+					q.push({y, stg});
+				}
+			}
+			else q.push({y,0});
+			visit[y] = true;
+
 		}
 	}
-	cout << min_width << ' ';
-	arrive += min_width;
+	//stg를 처음 게 체크가 안 됨
+
 	cout << arrive;
 	return 0;
 }
 
 /*
 같은 도시를 거치지 않고 최대한 많이 왕복
-bfs로 안 되나?
-중간에 경로가 줄었음을 어떻게 확인
-ㄴbfs로 depth별로 폭의 최소값을
+bfs로
 
-문제. 모든 경로가 같은 depth는 아님
-따라서, 어떻게 하냐. dedpth가 끊긴 애들을 뒤로 계속 연장?
-2를 만나는 경우에는 그냥 더해주면 될 거 같은데
-아니면?
-1 3 4
-1 5 6 4
-ㄴ이런 경우는? 어차피 길 하나니까 134가 틀어막아주겠네
-ㄴ그럼 그냥 2를 만난 경우만 최종 min_width에 더해주면 되겠네
+1이후로 하나에서 갈라져 나오는 경우 징표를 달아두기
+최초의 하나에 대해서만
+*/
 
-자꾸 min_width가 0이 됨.
-ㄴ 끝을 잘 내줘야 할 거 같음. 
-그리고 min_width 1을 찍었따가 갈라져서 2에 도달하는 경우는 어떻게?
+/*
+8 13
+1 3
+1 5
+1 6
+1 8
+3 4
+4 5
+4 6
+5 6
+5 7
+8 5
+7 2
+2 4
+6 2
 
+
+8 13
+1 5
+1 8
+1 6
+1 3
+3 4
+2 4
+4 5
+4 6
+5 6
+5 7
+6 2
+7 2
+8 5
+15
+18
+16
+13
+54
+57
+62
+34
+72
+42
+
+
+
+13
+15
+16
+18
+34
+57
+62
+72
+42
 */
