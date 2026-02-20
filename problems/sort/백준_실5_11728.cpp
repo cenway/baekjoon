@@ -19,23 +19,39 @@ int main() {
 
 	int i = 0;
 	int j = 0;
-	for(int k = 0; k < i+j; k++)
+	for(int k = 0; k < n+m; k++)
 	{
 		int big = 0;
 		int *tmp = &i;
-		
-		if(arrA[i] > arrB[j])
+		if(i>= n)
+		{
+			big = arrB[j];
+			tmp = &j;
+		}
+		else if(j >= m)
 		{
 			big = arrA[i];
 		}
 		else
-		{
-			big = arrB[i];
-			tmp = &j;
+		{	
+			if(arrA[i] < arrB[j])
+			{
+				big = arrA[i];
+			}
+			else
+			{
+				big = arrB[j];
+				tmp = &j;
+			}
 		}
 		arrC[k] = big;
 		*tmp += 1;
 
+	}
+
+	for(int k = 0; k < n+m; k++)
+	{
+		cout << arrC[k] << ' ';
 	}
 	return 0;
 }
