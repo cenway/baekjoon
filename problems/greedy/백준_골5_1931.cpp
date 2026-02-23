@@ -19,16 +19,17 @@ int main() {
 		arr[i] = {tmp1, tmp2};
 	}
 	sort(arr, arr+n);
-	int pre_begin = -1;
+
 	int pre_end = -1;
 	int ans = 0;
 	for(int i = 0; i < n; i++)
 	{
-		if(pre_end > arr[i].first)
+		if(pre_end > arr[i].second) 
 		{
-			if(pre_end > arr[i].second) pre_end = arr[i].second;
+			pre_end = arr[i].second;
 			continue;
 		}
+
 		pre_end = arr[i].second;
 		ans++;
 	}
