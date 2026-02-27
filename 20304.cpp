@@ -25,7 +25,7 @@ int main() {
 
 
 	queue<p>q;
-	q.push({0, 0, 0, {0, }});
+	q.push({0, 0, 0, vector<int>(m, 0)});
 	int max_dist = 0;
 
 	while(!q.empty())
