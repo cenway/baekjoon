@@ -14,3 +14,15 @@ lower_bound(uni.begin(), uni.end(), arr[i]) - uni.begin();
 
 합으로 묶어서 쓰는 방법은 자주 나오는 테크닉이니 기억
 (2295)
+
+mid = (low+high+1)/2;
+if(cable_cnt >= n) low = mid;
+		else high = mid-1;
+
+mid = (low+high)/2;
+if(cable_cnt >= n) low = mid+1;
+		else high = mid-1;
+
++1 은 위처럼 상황 따라 다름
+
+값이 큰 문제들이 많으니 오버플로우 주의
