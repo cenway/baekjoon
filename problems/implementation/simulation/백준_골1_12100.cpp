@@ -17,11 +17,8 @@ void func(int pmap[21][21], int cnt)
             for(int j = 0; j < n; j++)
             {
                 if(ans < pmap[i][j]) ans = pmap[i][j];
-                cout << pmap[i][j] << " ";
             }
-            cout << "\n";
         }
-        cout << "\n";
         return;
     }
 
@@ -33,7 +30,7 @@ void func(int pmap[21][21], int cnt)
 
 
 		//4방향에 대해 한 줄씩 배열로 만들어서
-		//복사 - 이동 - 덮어쓰기
+		//복사 - 이동+합치기 - 덮어쓰기
 		int arr[21];
 		
 		int x = 0;
@@ -57,7 +54,6 @@ void func(int pmap[21][21], int cnt)
 			int cur = 0;
             for(int k = start; (k < n && k >= 0); k+=dt)
             {
-                if(nmap[j][k] == 0) continue;
 				if(i == 0 || i == 2) 
                 {
                     x = j;
@@ -69,10 +65,46 @@ void func(int pmap[21][21], int cnt)
                     y = j;
                 }
 				arr[idx] = nmap[x][y];
+
 				idx++;
 			}
-			idx = 1;
-			
+
+			//여기서 이동+합치기
+			for(int k = 1; k < n; k++)
+			{
+				if(!arr[k] || k == cur) continue;
+				int tmp = arr[k];
+				arr[k] = 0;
+				if(tmp==arr[cur]) 
+				{
+					arr[cur] += tmp;
+					cur++;
+				}
+				else if(!arr[cur]) arr[cur] = tmp;
+				else 
+				{
+					arr[cur+1] = tmp;
+					cur++;
+				}
+				
+			}
+			idx = 0;
+
+			for(int k = start; (k < n && k >= 0); k+=dt)
+            {
+				if(i == 0 || i == 2) 
+                {
+                    x = j;
+                    y = k;
+                }
+                else if (i == 1 || i == 3)
+                {
+                    x = k;
+                    y = j;
+                }
+				nmap[x][y] = arr[idx];
+				idx++;
+			}
 		}
 		
 		func(nmap, cnt + 1);
@@ -96,6 +128,6 @@ int main()
 	memcpy(nmap, map, sizeof(nmap));
 
 	func(nmap ,0);
-
+	cout << ans;
 	return 0;
 }
