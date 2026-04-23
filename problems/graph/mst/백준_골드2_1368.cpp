@@ -9,7 +9,6 @@ priority_queue<pair<int, int>,
 			greater<pair<int, int>>>pq;
 
 int paddy[301][301];
-int well[301];
 bool visit[301];
 
 int main() {
@@ -20,31 +19,26 @@ int main() {
 	int n;
 	cin >> n;
 
-	well[0] = 100001;
-	int min_idx = 0;
 	for(int i = 1; i <= n; i++)
 	{
-		cin >> well[i];
-		if(well[min_idx] > well[i]) min_idx = i;
+		cin >> paddy[0][i];
 	}
 		
 	for(int i = 1; i <= n; i++)
-		for(int j = 1; j <= n; j++)
-			cin >> paddy[i][j];
+	{
+		for(int j = 0; j <= n; j++)
+		{
+			if(j == 0) paddy[i][j] = paddy[0][i];
+			else cin >> paddy[i][j];
+		}
+	}
 
-	
 	int cnt = 0;
 	int cost = 0;
 
-	cnt++;
-	cost += well[min_idx];
-	visit[min_idx] = true;
-	for(int i = 1; i <= n; i++)
-	{
-		if(i == min_idx) continue;
-		pq.push({well[i], i});
-		pq.push({paddy[min_idx][i], i});
-	}
+	visit[0] = true;
+	for(int i = 0; i <= n; i++)
+		pq.push({paddy[0][i], i});
 
 	while(cnt < n)
 	{
@@ -56,11 +50,10 @@ int main() {
 		cost += w;
 		cnt++;
 
-		for(int i = 1; i <= n; i++)
+		for(int i = 0; i <= n; i++)
 		{
 			if(i == a) continue;
 			if(visit[i]) continue;
-			pq.push({well[i], i});
 			pq.push({paddy[a][i], i});
 		}
 	}
